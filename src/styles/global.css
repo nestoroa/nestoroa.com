@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@theme {
+    --font-display: 'Poppins', sans-serif;
+    --font-body: 'Open-sans', sans-serif;
+
+    --color-theme-blue-silicon: #3b2086;
+    --color-theme-green-cambridge: #6fc583;
+    --color-theme-green-tea: #d2f0b6;
+    --color-theme-brown: #686963;
+    --color-theme-nyanza: #D3E5CE;
+    --color-theme-bistre: #39241C;
+}
+
+body {
+    @apply bg-neutral-800 text-neutral-100;
+    @apply p-4;
+    font-family: var(--font-body);
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+}
+
+.bg-gradient-silicon {
+    @apply from-theme-blue-silicon via-theme-green-cambridge to-theme-green-tea;
+}

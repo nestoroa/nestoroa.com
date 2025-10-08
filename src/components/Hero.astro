@@ -1,0 +1,33 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!-- Both divs are in a row, except in small screens -->
+<section
+  class="bg-gradient-to-br lg:bg-gradient-to-r bg-gradient-silicon rounded-3xl shadow-lg shadow-cyan-200/20 overflow-hidden
+    lg:flex"
+>
+  <div class='lg:shrink-0"'>
+    <img
+      alt="Fotografía de Néstor Oubiña Arriaga"
+      src="/images/nestor.webp"
+      class="m-auto object-cover
+        p-4 lg:p-0 max-h-96  
+        lg:h-128 lg:w-auto 
+        rounded-full lg:rounded-none
+        lg:mask-linear-from-65% lg:mask-linear-90 lg:mask-linear-to-100%"
+    />
+  </div>
+  <div
+    class="flex flex-col justify-center text-center text-white space-y-4 p-8
+  lg:text-left"
+  >
+    <h1 class="text-3xl font-bold">{title}</h1>
+    <span class="">{description}</span>
+  </div>
+</section>

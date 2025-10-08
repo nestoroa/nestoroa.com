@@ -1,0 +1,31 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import PhotoWall from "../components/PhotoWall.astro";
+import Projects from "../components/Projects.astro";
+import Contact from "../components/Contact.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+
+const {
+  title = "Néstor Oubiña Arriaga",
+  description = "Cloud Engineer & Photographer",
+} = Astro.props;
+
+// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
+// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+---
+
+<Layout title={title}>
+  <div class="grid grid-cols-5 grid-rows-5 gap-4">
+    <div class="col-span-5 row-span-2">
+      <Hero title={title} description={description} />
+    </div>
+    <div class="col-span-3 row-span-2 row-start-3"><PhotoWall /></div>
+    <div class="col-span-2 row-span-2 col-start-4 row-start-3">
+      <Projects />
+    </div>
+    <div class="col-span-3 row-start-5"><Contact /></div>
+    <div class="col-span-2 col-start-4 row-start-5"><Footer /></div>
+  </div>
+</Layout>
