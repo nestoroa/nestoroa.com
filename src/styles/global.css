@@ -4,12 +4,12 @@
     --font-display: 'Poppins', sans-serif;
     --font-body: 'Open-sans', sans-serif;
 
-    --color-theme-blue-silicon: #3b2086;
-    --color-theme-green-cambridge: #6fc583;
-    --color-theme-green-tea: #d2f0b6;
+    --color-theme-dark-blue: #3b2086;
+    --color-theme-dark-green: #6fc583;
+    --color-theme-light-green: #d2f0b6;
     --color-theme-brown: #686963;
-    --color-theme-nyanza: #D3E5CE;
-    --color-theme-bistre: #39241C;
+    --color-theme-grey-green: #D3E5CE;
+    --color-theme-dark-brown: #39241C;
 }
 
 body {
@@ -22,5 +22,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .bg-gradient-silicon {
-    @apply from-theme-blue-silicon via-theme-green-cambridge to-theme-green-tea;
+    @apply from-theme-dark-blue via-theme-dark-green to-theme-light-green;
+}
+
+.light-pill {
+    @apply bg-theme-light-green text-theme-dark-blue 
+    rounded-3xl shadow-lg shadow-cyan-200/20;
+}
+
+.dark-pill {
+    @apply bg-theme-dark-blue text-theme-light-green 
+    rounded-3xl shadow-lg shadow-cyan-200/20 ;
 }

@@ -1,4 +1,7 @@
 ---
+import { Image } from "astro:assets";
+import nestorImage from "../images/nestor.webp";
+
 export interface Props {
   title: string;
   description: string;
@@ -13,14 +16,18 @@ const { title, description } = Astro.props;
     lg:flex"
 >
   <div class='lg:shrink-0"'>
-    <img
+    <Image
+      src={nestorImage}
       alt="Fotografía de Néstor Oubiña Arriaga"
-      src="/images/nestor.webp"
-      class="m-auto object-cover
-        p-4 lg:p-0 max-h-96  
-        lg:h-128 lg:w-auto 
+      loading="eager"
+      width={384}
+      height={384}
+      inferSize={false}
+      class={`m-auto object-cover 
+        p-4 lg:p-0 
+        max-h-96 lg:h-128 lg:w-auto 
         rounded-full lg:rounded-none
-        lg:mask-linear-from-65% lg:mask-linear-90 lg:mask-linear-to-100%"
+        lg:mask-linear-from-65% lg:mask-linear-90 lg:mask-linear-to-100%`}
     />
   </div>
   <div

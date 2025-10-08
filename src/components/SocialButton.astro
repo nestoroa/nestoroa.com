@@ -1,0 +1,38 @@
+---
+interface Props {
+  platform: string;
+  url: string;
+  background?: string;
+}
+
+const { platform, url } = Astro.props as Props;
+
+const backgrounds = {
+  github: "bg-neutral-800",
+  linkedin: "bg-white",
+  instagram: "bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600",
+  whatsapp: "bg-green-500",
+  facebook: "bg-blue-600",
+  twitch: "bg-purple-600",
+  youtube: "bg-red-600",
+} as const;
+
+const background =
+  Astro.props.background ??
+  (platform in backgrounds
+    ? backgrounds[platform as keyof typeof backgrounds]
+    : "bg-gray-500");
+---
+
+<a
+  class={`m-2 p-2 size-16 flex items-center justify-center rounded-full ${background}`}
+  href={url}
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label={`Link to ${platform}`}
+  title={`Link to ${platform}`}
+>
+  <svg width="28" height="28">
+    <use xlink:href={`/src/assets/sprite.svg#${platform}`}></use>
+  </svg>
+</a>
