@@ -1,3 +1,224 @@
-<div class="bg-theme-mint-gray">
-    <p>Component placeholder</p>
+---
+import { Masonry } from "astro-masonry";
+import { Image } from "astro:assets";
+
+const gallery = Object.values(
+  import.meta.glob("@/assets/images/photowall/*.{png,jpg,jpeg,PNG,JPEG}", {
+    eager: true,
+    query: "?url",
+    import: "default",
+  })
+) as string[];
+---
+
+<section class="p-4 dark-pill overflow-hidden fill-white h-full">
+  <h1 class="text-2xl font-bold mb-4">Photo Wall</h1>
+  <Masonry
+    breakpointCols={{
+      default: 4,
+      1100: 3,
+      700: 2,
+      500: 1,
+    }}
+    sortByHeight={true}
+  >
+    {
+      gallery.map((photo, index) => (
+        <Image
+          src={photo}
+          alt={`Photo Wall Image ${index + 1}`}
+          width={300}
+          height={300}
+          class={`w-full h-auto cursor-pointer
+          hover:scale-105 transform-gpu transition-transform duration-200 ease-in-out relative z-10 hover:z-50 hover:shadow-2xl hover:brightness-110 hover:shadow-green-200`}
+          data-photo-index={index}
+          data-photo-src={photo}
+        />
+      ))
+    }
+  </Masonry>
+</section>
+
+<!-- Fullscreen Modal -->
+<div
+  id="fullscreen-modal"
+  class="fixed inset-0 bg-black/80 backdrop-blur-lg z-50 hidden items-center justify-center"
+>
+  <div class="relative w-full h-full flex items-center justify-center p-4">
+    <!-- Close button -->
+    <button
+      id="close-modal"
+      class="absolute top-4 right-4 text-black text-2xl font-bold z-10 bg-theme-light-green rounded-full w-10 h-10 flex items-center justify-center"
+      aria-label="Close fullscreen view"
+    >
+      ×
+    </button>
+
+    <!-- Navigation buttons -->
+    <button
+      id="prev-image"
+      class="absolute left-4 top-1/2 transform -translate-y-1/2 text-black text-3xl font-bold hover:text-gray-300 z-10 bg-theme-light-green bg-opacity-50 rounded-full w-12 h-12 flex items-center justify-center"
+      aria-label="Previous image"
+    >
+      ‹
+    </button>
+
+    <button
+      id="next-image"
+      class="absolute right-4 top-1/2 transform -translate-y-1/2 text-black text-3xl font-bold hover:text-gray-300 z-10 bg-theme-light-green bg-opacity-50 rounded-full w-12 h-12 flex items-center justify-center"
+      aria-label="Next image"
+    >
+      ›
+    </button>
+
+    <!-- Image container with proper viewport constraints -->
+    <img
+      id="fullscreen-image"
+      src=""
+      alt=""
+      class="max-w-[calc(100vw-8rem)] max-h-[calc(100vh-8rem)] w-auto h-auto object-contain transition-opacity duration-300 ease-in-out"
+    />
+
+    <!-- Image counter -->
+    <div
+      class="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white bg-black bg-opacity-50 px-3 py-1 rounded"
+    >
+      <span id="current-image-number">1</span> / <span id="total-images"
+        >{gallery.length}</span
+      >
+    </div>
+  </div>
 </div>
+
+<script>
+  // Photo wall fullscreen functionality
+  (() => {
+    const modal = document.getElementById("fullscreen-modal");
+    const fullscreenImage = document.getElementById(
+      "fullscreen-image"
+    ) as HTMLImageElement;
+    const closeBtn = document.getElementById("close-modal");
+    const prevBtn = document.getElementById("prev-image");
+    const nextBtn = document.getElementById("next-image");
+    const currentImageNumber = document.getElementById("current-image-number");
+
+    if (
+      !modal ||
+      !fullscreenImage ||
+      !closeBtn ||
+      !prevBtn ||
+      !nextBtn ||
+      !currentImageNumber
+    ) {
+      console.error("PhotoWall: Required elements not found");
+      return;
+    }
+
+    const images = Array.from(
+      document.querySelectorAll("[data-photo-index]")
+    ) as HTMLElement[];
+    let currentIndex = 0;
+
+    function showImage(index: number, useTransition: boolean = false): void {
+      // Validate index to prevent potential security issues
+      const validIndex = Math.max(0, Math.min(index, images.length - 1));
+      currentIndex = validIndex;
+
+      const imageElement = images[validIndex];
+      const imageSrc = imageElement.getAttribute("data-photo-src");
+      const imageAlt = imageElement.getAttribute("alt");
+
+      if (imageSrc && imageAlt && fullscreenImage) {
+        if (useTransition) {
+          // Fade out current image
+          fullscreenImage.style.opacity = "0";
+
+          // After fade out completes, change image and fade in
+          setTimeout(() => {
+            fullscreenImage.src = imageSrc;
+            fullscreenImage.alt = imageAlt;
+            currentImageNumber.textContent = String(validIndex + 1);
+
+            // Fade in new image
+            fullscreenImage.style.opacity = "1";
+          }, 150); // Half of the transition duration
+        } else {
+          // No transition for initial load
+          fullscreenImage.src = imageSrc;
+          fullscreenImage.alt = imageAlt;
+          fullscreenImage.style.opacity = "1";
+          currentImageNumber.textContent = String(validIndex + 1);
+        }
+      }
+    }
+
+    function openModal(index: number): void {
+      showImage(index);
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+      // Prevent body scroll when modal is open
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModal(): void {
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+      // Restore body scroll
+      document.body.style.overflow = "";
+    }
+
+    function nextImage(): void {
+      const nextIndex = (currentIndex + 1) % images.length;
+      showImage(nextIndex, true);
+    }
+
+    function prevImage(): void {
+      const prevIndex = (currentIndex - 1 + images.length) % images.length;
+      showImage(prevIndex, true);
+    }
+
+    // Add click listeners to all photo wall images
+    images.forEach((img, index) => {
+      img.addEventListener("click", (e) => {
+        e.preventDefault();
+        openModal(index);
+      });
+    });
+
+    // Modal controls
+    closeBtn.addEventListener("click", closeModal);
+    nextBtn.addEventListener("click", nextImage);
+    prevBtn.addEventListener("click", prevImage);
+
+    // Close modal when clicking outside the image
+    modal.addEventListener("click", (e) => {
+      // Check if click is on modal background or the inner container (but not on buttons or image)
+      const target = e.target as HTMLElement;
+      if (
+        target === modal ||
+        (target.classList.contains("w-full") &&
+          target.classList.contains("h-full")) ||
+        target === modal.querySelector(".relative")
+      ) {
+        closeModal();
+      }
+    });
+
+    // Keyboard navigation
+    document.addEventListener("keydown", (e) => {
+      if (!modal.classList.contains("hidden")) {
+        switch (e.key) {
+          case "Escape":
+            closeModal();
+            break;
+          case "ArrowLeft":
+            prevImage();
+            break;
+          case "ArrowRight":
+            nextImage();
+            break;
+        }
+      }
+    });
+  })();
+</script>
