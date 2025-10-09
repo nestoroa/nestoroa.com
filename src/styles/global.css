@@ -1,19 +1,21 @@
 @import "tailwindcss";
+@plugin '@midudev/tailwind-animations';
+
 
 @theme {
     --font-display: 'Poppins', sans-serif;
     --font-body: 'Open-sans', sans-serif;
 
-    --color-theme-dark-blue: #3b2086;
-    --color-theme-dark-green: #6fc583;
-    --color-theme-light-green: #d2f0b6;
-    --color-theme-brown: #686963;
+    --color-theme-dark-blue: #2a2733;
+    --color-theme-dark-green: #2e743f;
+    --color-theme-light-green: #bbeea3;
+    --color-theme-brown: #585c47;
     --color-theme-grey-green: #D3E5CE;
     --color-theme-dark-brown: #39241C;
 }
 
 body {
-    @apply bg-neutral-800 text-neutral-100;
+    @apply bg-neutral-900 text-neutral-100;
     @apply p-4;
     font-family: var(--font-body);
 }
@@ -27,10 +29,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .light-pill {
     @apply bg-theme-light-green text-theme-dark-blue 
-    rounded-3xl shadow-lg shadow-cyan-200/20;
+    rounded-3xl shadow-lg shadow-black/20;
 }
 
 .dark-pill {
     @apply bg-theme-dark-blue text-theme-light-green 
-    rounded-3xl shadow-lg shadow-cyan-200/20 ;
+    rounded-3xl shadow-lg shadow-black/20;
 }
