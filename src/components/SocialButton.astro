@@ -25,14 +25,17 @@ const background =
 ---
 
 <a
-  class={`m-2 p-2 size-16 flex items-center justify-center rounded-full ${background}`}
+  class={`m-2 p-2 size-16 flex items-center justify-center rounded-full ${background}
+    hover:scale-110 hover:shadow-lg hover:shadow-cyan-200/20
+    active:scale-95
+    transition-all duration-200 group`}
   href={url}
   target="_blank"
   rel="noopener noreferrer"
   aria-label={`Link to ${platform}`}
   title={`Link to ${platform}`}
 >
-  <svg width="28" height="28">
+  <svg width="28" height="28" class="fill-white group-hover:-rotate-15 transition-transform ">
     <use xlink:href={`/src/assets/sprite.svg#${platform}`}></use>
   </svg>
 </a>

@@ -18,17 +18,26 @@ const {
 ---
 
 <Layout title={title}>
-  <div class="flex flex-col lg:grid grid-cols-5 grid-rows-5 gap-4">
-    <div class="col-span-5 row-span-2">
+  <div class="flex flex-col gap-4">
+    <div class="col-span-5 row-span-1">
       <Hero title={title} description={description} />
     </div>
-    <div class="col-span-3 row-span-2 row-start-3">
-      <BentoPlaceholder />
+    <div class="col-span-5 row-span-3" id="photo-wall">
+      <PhotoWall />
     </div>
-    <div class="col-span-2 row-span-2 col-start-4 row-start-3">
-      <BentoPlaceholder />
+    <div class="lg:grid grid-cols-5 grid-rows-5 gap-4">
+      <div class="col-span-5 row-span-1" id="projects">
+        <BentoPlaceholder />
+      </div>
+      <div class="col-span-5 row-span-2" id="resume">
+        <BentoPlaceholder />
+      </div>
+      <div class="col-span-3 row-span-1 row-start-4" id="contact">
+        <Contact />
+      </div>
+      <div class="col-span-2 row-span-1 col-start-4 row-start-4">
+        <Footer />
+      </div>
     </div>
-    <div class="col-span-3 row-span-1"><Contact /></div>
-    <div class="col-span-2 row-span-5 col-start-4"><Footer /></div>
   </div>
 </Layout>

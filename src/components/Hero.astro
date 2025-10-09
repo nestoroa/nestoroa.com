@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import nestorImage from "../images/nestor.webp";
+import nestorImage from "@/assets/images/nestor.webp";
 
 export interface Props {
   title: string;
@@ -12,7 +12,7 @@ const { title, description } = Astro.props;
 
 <!-- Both divs are in a row, except in small screens -->
 <section
-  class="bg-gradient-to-br lg:bg-gradient-to-r bg-gradient-silicon rounded-3xl shadow-lg shadow-cyan-200/20 overflow-hidden
+  class="bg-gradient-to-br lg:bg-gradient-to-r bg-gradient-silicon rounded-3xl shadow-lg shadow-black/20 overflow-hidden
     lg:flex"
 >
   <div class='lg:shrink-0"'>
@@ -27,7 +27,8 @@ const { title, description } = Astro.props;
         p-4 lg:p-0 
         max-h-96 lg:h-128 lg:w-auto 
         rounded-full lg:rounded-none
-        lg:mask-linear-from-65% lg:mask-linear-90 lg:mask-linear-to-100%`}
+        lg:mask-linear-from-65% lg:mask-linear-90 lg:mask-linear-to-100%
+        animate-blurred-fade-in transition-all duration-1000`}
     />
   </div>
   <div
@@ -37,4 +38,17 @@ const { title, description } = Astro.props;
     <h1 class="text-3xl font-bold">{title}</h1>
     <span class="">{description}</span>
   </div>
+  <div
+    class="flex flex-col justify-center text-center text-white space-y-4 p-8
+  lg:text-left"
+  >
+  <!-- menu links -->
+  <nav class="flex justify-center space-x-4">
+    <a href="#photo-wall" class="hover:underline">Photo Wall</a>
+    <a href="#projects" class="hover:underline">Projects</a>
+    <a href="#resume" class="hover:underline">Resume</a>
+    <a href="#contact" class="hover:underline">Contact</a>
+  </nav>
+
+</div>
 </section>
