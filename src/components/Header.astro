@@ -11,11 +11,11 @@ const { title, description } = Astro.props;
 ---
 
 <!-- Both divs are in a row, except in small screens -->
-<section
-  class="bg-gradient-to-br lg:bg-gradient-to-r bg-gradient-silicon rounded-3xl shadow-lg shadow-black/20 overflow-hidden
-    lg:flex"
+<header
+  class="bg-gradient-to-br lg:bg-gradient-to-r bg-gradient-silicon rounded-b-3xl shadow-lg shadow-black/20 overflow-hidden
+    lg:flex mb-6"
 >
-  <div class='lg:shrink-0"'>
+  <div class='lg:shrink-0'>
     <Image
       src={nestorImage}
       alt="Fotografía de Néstor Oubiña Arriaga"
@@ -42,13 +42,12 @@ const { title, description } = Astro.props;
     class="flex flex-col justify-center text-center text-white space-y-4 p-8
   lg:text-left"
   >
-  <!-- menu links -->
-  <nav class="flex justify-center space-x-4">
-    <a href="#photo-wall" class="hover:underline">Photo Wall</a>
-    <a href="#projects" class="hover:underline">Projects</a>
-    <a href="#resume" class="hover:underline">Resume</a>
-    <a href="#contact" class="hover:underline">Contact</a>
-  </nav>
-
-</div>
-</section>
+    <!-- menu links -->
+    <nav class="flex justify-center space-x-4">
+      <a href="/#photo-wall" class="hover:underline">Photo Wall</a>
+      <a href="/#projects" class="hover:underline">Projects</a>
+      <a href="/resume" class="hover:underline">Resume</a>
+      <a href="/#contact" class="hover:underline">Contact</a>
+    </nav>
+  </div>
+</header>
