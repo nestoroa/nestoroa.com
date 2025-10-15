@@ -11,7 +11,7 @@ const gallery = Object.values(
 ) as string[];
 ---
 
-<section class="p-4 dark-pill overflow-hidden fill-white h-full">
+<section class="p-4 dark-pill fill-white h-full overflow-auto">
   <h1 class="text-2xl font-bold mb-4">Photo Wall</h1>
   <Masonry
     breakpointCols={{
@@ -21,6 +21,7 @@ const gallery = Object.values(
       500: 1,
     }}
     sortByHeight={true}
+    class="masonry-grid gap-2"
   >
     {
       gallery.map((photo, index) => (
@@ -29,7 +30,7 @@ const gallery = Object.values(
           alt={`Photo Wall Image ${index + 1}`}
           width={300}
           height={300}
-          class={`w-full h-auto cursor-pointer
+          class={`w-full h-auto cursor-pointer m-2 rounded-lg
           hover:scale-105 transform-gpu transition-transform duration-200 ease-in-out relative z-10 hover:z-50 hover:shadow-2xl hover:brightness-110 hover:shadow-green-200`}
           data-photo-index={index}
           data-photo-src={photo}
