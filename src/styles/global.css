@@ -6,6 +6,13 @@
     --font-display: 'Poppins', sans-serif;
     --font-body: 'Open-sans', sans-serif;
 
+    --color-theme-primary: #2a2733;
+    --color-theme-secondary: #2e743f;
+    --color-theme-accent: #bbeea3;
+    --color-theme-neutral: #585c47;
+    --color-theme-base: #D3E5CE;
+    --color-theme-info: #39241C;
+    
     --color-theme-dark-blue: #2a2733;
     --color-theme-dark-green: #2e743f;
     --color-theme-light-green: #bbeea3;
@@ -16,12 +23,13 @@
 
 body {
     @apply bg-neutral-900 text-neutral-100;
-    @apply p-4;
+    @apply lg:max-w-10/12 lg:mx-auto;
     font-family: var(--font-body);
 }
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
 }
+
 
 .bg-gradient-silicon {
     @apply from-theme-dark-blue via-theme-dark-green to-theme-light-green;
@@ -35,4 +43,20 @@ h1, h2, h3, h4, h5, h6 {
 .dark-pill {
     @apply bg-theme-dark-blue text-theme-light-green 
     rounded-3xl shadow-lg shadow-black/20;
+}
+
+::-webkit-scrollbar {
+    /* Customize the scrollbar width */
+    @apply w-2;
+    /* Customize the scrollbar height (for horizontal scrollbars) */
+    @apply h-2;
+}
+
+::-webkit-scrollbar-track {
+    @apply rounded-full bg-theme-dark-green;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-white/50;
+    @apply transition-colors duration-200 ease-in-out;
 }

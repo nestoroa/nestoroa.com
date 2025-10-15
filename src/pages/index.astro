@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Hero from "../components/Hero.astro";
+import Header from "../components/Header.astro";
 import PhotoWall from "../components/PhotoWall.astro";
 import Projects from "../components/Projects.astro";
 import Contact from "../components/Contact.astro";
@@ -12,25 +12,27 @@ const {
   title = "Néstor Oubiña Arriaga",
   description = "Cloud Engineer & Photographer",
 } = Astro.props;
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
 <Layout title={title}>
-  <div class="flex flex-col gap-4">
-    <div class="col-span-5 row-span-1">
-      <Hero title={title} description={description} />
-    </div>
-    <div class="col-span-5 row-span-3" id="photo-wall">
-      <PhotoWall />
+  <Header title={title} description={description} />
+  <div class="flex flex-col gap-4 flex-grow p-4 ">
+    <div class="lg:grid grid-cols-5 grid-rows-1 gap-4 max-h-screen lg:max-h-[48rem]">
+      <div class="col-span-3 row-span-1 overflow-hidden" id="photo-wall">
+        <div class="h-full overflow-auto">
+          <PhotoWall />
+        </div>
+      </div>
+      <div class="col-span-2 row-span-1 col-start-4" id="gear">
+        <BentoPlaceholder title="Gear" />
+      </div>
     </div>
     <div class="lg:grid grid-cols-5 grid-rows-5 gap-4">
       <div class="col-span-5 row-span-1" id="projects">
-        <BentoPlaceholder />
+        <BentoPlaceholder title="Projects" />
       </div>
       <div class="col-span-5 row-span-2" id="resume">
-        <BentoPlaceholder />
+        <BentoPlaceholder title="Mini Resume" />
       </div>
       <div class="col-span-3 row-span-1 row-start-4" id="contact">
         <Contact />

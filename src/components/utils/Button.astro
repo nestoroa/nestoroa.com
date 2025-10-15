@@ -1,0 +1,128 @@
+---
+export interface Props {
+  variant?: 'primary' | 'secondary' | 'accent' | 'ghost' | 'light' | 'dark';
+  size?: 'sm' | 'md' | 'lg' | 'xl';
+  type?: 'button' | 'submit' | 'reset';
+  href?: string;
+  target?: '_blank' | '_self' | '_parent' | '_top';
+  disabled?: boolean;
+  loading?: boolean;
+  fullWidth?: boolean;
+  icon?: string;
+  iconPosition?: 'left' | 'right';
+  class?: string;
+}
+
+const {
+  variant = 'primary',
+  size = 'md',
+  type = 'button',
+  href,
+  target,
+  disabled = false,
+  loading = false,
+  fullWidth = false,
+  icon,
+  iconPosition = 'left',
+  class: className = '',
+  ...rest
+} = Astro.props;
+
+// Base styles
+const baseStyles = 'inline-flex items-center justify-center font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-900 disabled:opacity-50 disabled:cursor-not-allowed';
+
+// Variant styles
+const variantStyles = {
+  primary: 'bg-theme-dark-green text-white hover:bg-theme-secondary focus:ring-theme-dark-green shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 hover:scale-105 ',
+  secondary: 'bg-theme-dark-blue text-theme-light-green hover:bg-theme-primary focus:ring-theme-dark-blue shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 hover:scale-105 ',
+  accent: 'bg-theme-light-green text-theme-dark-blue hover:bg-theme-accent focus:ring-theme-light-green shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 hover:scale-105 ',
+  ghost: 'text-theme-light-green hover:bg-theme-dark-blue/20 focus:ring-theme-light-green border border-theme-light-green/30 hover:border-theme-light-green',
+  light: 'light-pill hover:shadow-xl transform hover:-translate-y-0.5 hover:scale-105 focus:ring-theme-light-green',
+  dark: 'dark-pill hover:shadow-xl transform hover:-translate-y-0.5 hover:scale-105 focus:ring-theme-dark-blue'
+};
+
+// Size styles
+const sizeStyles = {
+  sm: 'px-3 py-1.5 text-sm rounded-lg gap-1.5',
+  md: 'px-4 py-2 text-base rounded-xl gap-2',
+  lg: 'px-6 py-3 text-lg rounded-2xl gap-2.5',
+  xl: 'px-8 py-4 text-xl rounded-3xl gap-3'
+};
+
+// Combine classes
+const buttonClasses = [
+  baseStyles,
+  variantStyles[variant],
+  sizeStyles[size],
+  fullWidth ? 'w-full' : '',
+  loading ? 'cursor-wait' : '',
+  className
+].filter(Boolean).join(' ');
+
+// Determine if it's a link or button
+const isLink = href && !disabled;
+
+---
+
+{isLink ? (
+  <a 
+    class={buttonClasses} 
+    href={href} 
+    target={target}
+    role="button"
+    {...rest}
+  >
+    {loading && (
+      <svg 
+        class="animate-spin h-4 w-4" 
+        xmlns="http://www.w3.org/2000/svg" 
+        fill="none" 
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="m4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+      </svg>
+    )}
+    
+    {icon && iconPosition === 'left' && !loading && (
+      <span class="icon" set:html={icon} />
+    )}
+    
+    <slot />
+    
+    {icon && iconPosition === 'right' && !loading && (
+      <span class="icon" set:html={icon} />
+    )}
+  </a>
+) : (
+  <button 
+    class={buttonClasses} 
+    type={type}
+    disabled={disabled || loading}
+    {...rest}
+  >
+    {loading && (
+      <svg 
+        class="animate-spin h-4 w-4" 
+        xmlns="http://www.w3.org/2000/svg" 
+        fill="none" 
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="m4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+      </svg>
+    )}
+    
+    {icon && iconPosition === 'left' && !loading && (
+      <span class="icon" set:html={icon} />
+    )}
+    
+    <slot />
+    
+    {icon && iconPosition === 'right' && !loading && (
+      <span class="icon" set:html={icon} />
+    )}
+  </button>
+)}
