@@ -1,0 +1,28 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Resume_ from "@/components/Resume.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+
+const {
+  title = "Néstor Oubiña Arriaga",
+  description = "Cloud Engineer & Photographer",
+} = Astro.props;
+---
+
+<Layout title={title}>
+  <div class="min-h-screen flex flex-col">
+    <div class="flex flex-col gap-4 flex-grow">
+      <div class="col-span-5 row-span-1">
+        <Header title={title} description={description} />
+      </div>
+      <div class="col-span-5 row-span-3" id="resume">
+        <Resume_ />
+      </div>
+    </div>
+    <div class="mt-auto">
+      <Footer />
+    </div>
+  </div>
+</Layout>

@@ -1,0 +1,66 @@
+---
+import Button from "../utils/Button.astro";
+
+export interface CertificationProps {
+  name: string;
+  issuer: string;
+  issueDate: string;
+  expirationDate?: string;
+  certificateUrl?: string;
+  details?: string[];
+}
+
+const { name, issuer, issueDate, expirationDate, certificateUrl, details } =
+  Astro.props;
+
+// External link icon SVG
+const externalLinkIcon = `<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+>
+  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+  <polyline points="15,3 21,3 21,9"></polyline>
+  <line x1="10" y1="14" x2="21" y2="3"></line>
+</svg>`;
+---
+
+<section class="p-4 max-w-[90ch] space-y-2">
+  <h2 class="text-3xl font-bold">{name}</h2>
+  <h3 class="text-2xl font-semibold">{issuer}</h3>
+  <p class="italic">
+    Issued: {issueDate}
+    {expirationDate && ` • Expires: ${expirationDate}`}
+  </p>
+  {
+    details && details.length > 0 && (
+      <ul class="list-disc list-inside">
+        {details.map((detail) => (
+          <li class="ml-4">{detail}</li>
+        ))}
+      </ul>
+    )
+  }
+  {
+    certificateUrl && (
+      <Button
+        variant="ghost"
+        size="md"
+        href={certificateUrl}
+        target="_blank"
+        icon={externalLinkIcon}
+        iconPosition="right"
+        aria-label={`View ${name} certificate from ${issuer} (opens in new tab)`}
+      >
+        View Certificate in Credly
+      </Button>
+    )
+  }
+</section>

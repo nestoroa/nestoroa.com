@@ -1,0 +1,122 @@
+---
+import { Image } from "astro:assets";
+import JobExperience from "./resume/JobExperience.astro";
+import Education from "./resume/Education.astro";
+import Certification from "./resume/Certification.astro";
+---
+
+<section class="p-4 h-full space-y-6">
+  <h1 class="text-6xl font-bold mb-6">Resume</h1>
+  <div class="flex flex-col gap-8 lg:grid lg:grid-cols-3 lg:gap-8">
+    <div class="space-y-8 dark-pill p-8 col-span-1">
+      <div id="certifications">
+        <h2 class="text-2xl font-semibold mb-2">Licenses & Certifications</h2>
+        <Certification
+          name="Google Cloud Associate Cloud Engineer"
+          issuer="Google Cloud"
+          issueDate="July 2024"
+          expirationDate="July 2027"
+          certificateUrl="https://www.credly.com/badges/e5773841-a879-451e-9aba-2a13aa98a786"
+          details={[
+            "Demonstrated proficiency in deploying applications, monitoring operations, and managing enterprise solutions",
+            "Skilled in using Google Cloud Console and command-line interface to perform common platform-based tasks",
+            "Experience with compute, storage, and networking services",
+            "Knowledge of cloud security, compliance, and identity management",
+          ]}
+        />
+      </div>
+      <div id="education">
+        <h2 class="text-2xl font-semibold mb-2">Education</h2>
+        <Education
+          institution="Universidad Politécnica de Madrid"
+          degree="Master's Degree in Distributed and Embedded Systems Software"
+          location="Madrid, Spain"
+          startDate="September 2021"
+          endDate="October 2023"
+          details={[
+            "European quality seal EUROInf® certified program (January 2021)",
+            "Rigorous evaluation process meeting international quality criteria",
+            "Key subjects: Data Science, Systems Software Engineering, Advanced Smartphone Programming",
+            "Internet Application Services and Protocols, Control Systems, Real-time Systems",
+            "Distributed Systems, Fault-tolerant Distributed Systems, Embedded Systems",
+            "Skills: Scripting, Systems Engineering",
+          ]}
+        />
+
+        <Education
+          institution="Universidad Politécnica de Madrid"
+          degree="Bachelor's Degree in Computer Engineering"
+          location="Madrid, Spain"
+          startDate="2014"
+          endDate="2021"
+          details={[
+            "EURO-INF® accredited program by Quality Assurance Network for Informatics Education (EQANIE)",
+            "Certificate ensuring quality, relevance, transparency, recognition and mobility in European Higher Education Area",
+            "Leadership roles: President of Core Dumped Association (2018/19), Secretary (2016/18)",
+            "Student representation: Deputy Degree Representative (2015/16)",
+            "Active participation in student organizations and academic governance",
+          ]}
+        />
+      </div>
+    </div>
+    <div id="job-experiences" class="space-y-8 dark-pill p-8 col-span-2">
+      <h2 class="text-2xl font-semibold mb-2">Job Experiences</h2>
+      <JobExperience
+        company="Geotab Inc."
+        position="IT Cloud Operations Engineering Specialist"
+        location="Madrid, Spain"
+        startDate="April 2022"
+        endDate="Present"
+        duties={[
+          "Systems engineering and cloud infrastructure management",
+          "Developed automation scripts and command sequences for operational efficiency",
+          "Reviewed and optimized cloud infrastructure for performance and cost-efficiency",
+          "Streamlined standard operations processes through Python and Bash scripting",
+        ]}
+      />
+
+      <JobExperience
+        company="Valid"
+        position="IT Business Operations Systems Administrator"
+        location="Madrid, Spain"
+        startDate="June 2019"
+        endDate="February 2022"
+        duties={[
+          "Systems engineering and infrastructure administration",
+          "Database administration and management",
+          "Business operations systems support and maintenance",
+          "IT operations and systems optimization",
+        ]}
+      />
+
+      <JobExperience
+        company="Fujifilm España"
+        position="Computerized Radiology Systems Support Engineer"
+        location="Madrid, Spain"
+        startDate="May 2018"
+        endDate="March 2019"
+        duties={[
+          "Systems: Verification of backup and replica status at virtual machine and file levels, VMware platform monitoring",
+          "Hardware: Server and workstation status verification, workstation and related hardware maintenance",
+          "Databases: DataWarehouse queries, SQL and Oracle database access and queries",
+          "Integration: HL7 standard messaging administration via Mirth, hospital and external systems integration maintenance",
+          "Software: Administration of Fujifilm-developed programs (Synapse PACS, Synapse VNA, Synapse 3D, and RIS)",
+          "Incident resolution and technical support",
+        ]}
+      />
+
+      <JobExperience
+        company="Universidad Politécnica de Madrid"
+        position="Collaboration Scholarship"
+        location="Madrid, Spain"
+        startDate="October 2016"
+        endDate="February 2018"
+        duties={[
+          "Collaboration for MOOCs' accessibility at the Educational Innovation department",
+          "Support for online educational platform accessibility improvements",
+          "Technical assistance for educational technology initiatives",
+        ]}
+      />
+    </div>
+  </div>
+</section>
